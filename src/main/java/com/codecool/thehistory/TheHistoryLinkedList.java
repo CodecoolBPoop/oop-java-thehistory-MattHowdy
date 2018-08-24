@@ -1,9 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheHistoryLinkedList implements TheHistory {
     /**
@@ -14,28 +11,48 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void add(String text) {
         //TODO: check the TheHistory interface for more information
+        List<String> textArray = Arrays.asList(text.split("\\W+"));
+        wordsLinkedList.addAll(textArray);
+
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
         //TODO: check the TheHistory interface for more information
+        Iterator<String> itrArray = wordsLinkedList.iterator();
+        while (itrArray.hasNext()) {
+            if (itrArray.next().equalsIgnoreCase(wordToBeRemoved)) {
+                itrArray.remove();
+            }
+        }
+
     }
 
     @Override
     public int size() {
         //TODO: check the TheHistory interface for more information
-        return 0;
+        return wordsLinkedList.size();
     }
 
     @Override
     public void clear() {
+        wordsLinkedList.clear();
         //TODO: check the TheHistory interface for more information
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
         //TODO: check the TheHistory interface for more information
+        ListIterator<String> iterator = wordsLinkedList.listIterator();
+
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+            if (next.equals(from)) {
+                iterator.set(to);
+            }
+        }
     }
+
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
